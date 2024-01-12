@@ -14,19 +14,20 @@ namespace Pac_Man
    
     public partial class PacMan : Form
     {
-        int playerspeed = 4; 
+        int playerSpeed = 4;
+        int playerscore = 0;
         string mainmenue = "waiting";
 
         SoundPlayer sp;
 
-        bool wDown = false;
-        bool sDown = false;
-        bool dDown = false;
-        bool aDown = false;
-        bool upArrowDown = false;
-        bool downArrowDown = false;
-        bool rightArrowDown = false;
-        bool leftArrowDown = false;
+        //bool wDown = false;
+        //bool sDown = false;
+        //bool dDown = false;
+        //bool aDown = false;
+        //bool upArrowDown = false;
+        //bool downArrowDown = false;
+        //bool rightArrowDown = false;
+        //bool leftArrowDown = false;
 
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush redBrush = new SolidBrush(Color.Red);
@@ -36,11 +37,21 @@ namespace Pac_Man
         SolidBrush blackBrush = new SolidBrush(Color.Black);
 
 
-        Rectangle Wall1 = new Rectangle(260, 40, 5, 300);
-        Rectangle Wall2 = new Rectangle(50, 40, 5, 40);
-        Rectangle Wall3 = new Rectangle(600, 200, 5, 100); 
-        Rectangle Wall4 = new Rectangle(50, 40, 5, 40);
-        Rectangle Wall5 = new Rectangle(50, 40, 5, 40);
+       
+        Rectangle Wall1 = new Rectangle(50 ,60, 70, 5);
+        Rectangle Wall2 = new Rectangle(180, 60, 70, 5);
+        Rectangle Wall3 = new Rectangle(170, 200, 5, 125);
+        Rectangle Wall4 = new Rectangle(110, 190, 5, 90);
+        Rectangle Wall5 = new Rectangle(60, 275, 50, 5);
+        Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+        //Rectangle Wall7 = new Rectangle(0, 125, 70, 5); 
+        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+
+        Rectangle pacman = new Rectangle(10, 300, 20, 20);
+        string pacDirection = "right";
 
 
         public PacMan()
@@ -49,25 +60,24 @@ namespace Pac_Man
         }
         public void GameInitialize()
         {
-            Graphics g = this.CreateGraphics();
-
+          
             Titlelable.Visible = false;
             Subtitlelable1.Visible = false;
             Subtitlelable2.Visible = false;
             Titlelable.Text = "";
             Subtitlelable1.Text = "";
             Subtitlelable2.Text = "";
-            Scorelable.Text = "";
+            Scorelable.Text = "0";
 
-            //player1score = 0;
-          
+            pacmantimer.Enabled = true;
+
             mainmenue = "running";
 
         }
 
         private void PacMan_Paint(object sender, PaintEventArgs e)
         {
-            Graphics g = this.CreateGraphics();
+          
             if (mainmenue == "waiting")
             {
 
@@ -81,58 +91,123 @@ namespace Pac_Man
             }
             else if (mainmenue == "running")
             {
-                pacmantimer.Enabled = true;
+               
                 Titlelable.Visible = false;
                 Subtitlelable1.Visible = false;
                 Subtitlelable2.Visible = false;
 
                 Scorelable.Visible = true;
+                Scorelable.Text = $"{playerscore}";
 
                 e.Graphics.FillRectangle(blackBrush, Wall1);
                 e.Graphics.FillRectangle(blackBrush, Wall2);
                 e.Graphics.FillRectangle(blackBrush, Wall3);
                 e.Graphics.FillRectangle(blackBrush, Wall4);
                 e.Graphics.FillRectangle(blackBrush, Wall5);
+                e.Graphics.FillRectangle(blackBrush, Wall6);
+
+                e.Graphics.FillEllipse(yellowBrush, pacman);
 
 
             }
         }
        
 
+     
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+           // if (upArrowDown == true /*&& pacman.Y > this.Height*/)
+            if (pacDirection == "up")
+            {
+                pacman.Y -= playerSpeed;
+
+            }
+
+            if (pacDirection == "down")
+            {
+                pacman.Y += playerSpeed;
+
+            }
+          
+            if (pacDirection == "right")
+            {
+                pacman.X += playerSpeed;
+            }
+
+            if (pacDirection == "left ")
+            {
+                pacman.X += playerSpeed;
+            }
+
+            if (pacDirection == "up ")
+            {
+                pacman.Y -= playerSpeed;
+            }
+            if (pacDirection == "down")
+            {
+                pacman.Y += playerSpeed;
+
+            }
+            if (pacDirection == "right")
+            {
+                pacman.X += playerSpeed;
+            }
+
+            if (pacDirection == "left ")
+            {
+                pacman.X += playerSpeed;
+            }
+
+            if (pacman.Y > this.Height)
+            {
+                pacman.Y = 300;
+                pacman.X = 10;
+
+            }
+            if (playerscore == 5)
+            {
+                pacmantimer.Enabled = false;
+                mainmenue = "playerwon";
+            }
+
+            Refresh();
+        }
+
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    wDown = true;
+                    pacDirection = "up";
 
                     break;
                 case Keys.S:
-                    sDown = true;
+                    pacDirection = "down";
                     break;
 
                 case Keys.D:
-                    dDown = true;
+                    pacDirection = "right";
                     break;
 
                 case Keys.A:
-                    aDown = true;
+                    pacDirection = "left";
                     break;
 
                 case Keys.Up:
-                    upArrowDown = true;
+                    pacDirection = "up";
                     break;
 
                 case Keys.Down:
-                    downArrowDown = true;
+                    pacDirection = "down";
                     break;
 
                 case Keys.Right:
-                    rightArrowDown = true;
+                    pacDirection = "right";
                     break;
 
                 case Keys.Left:
-                    leftArrowDown = true;
+                    pacDirection = "left";
                     break;
 
                 case Keys.Space:
@@ -149,79 +224,40 @@ namespace Pac_Man
                     break;
             }
         }
-
-        private void timer1_Tick(object sender, EventArgs e)
-        {
-            //    if (upArrowDown == true && player.Y > Finishlinelable.Height - 3)
-            //    {
-            //        //player.Y -= playerSpeed;
-            //       
-
-            //    }
-            //    if (downArrowDown == true && player2.Y < this.Height - player2.Height)
-            //    {
-            //        player.Y += playerSpeed;
-            //      
-            //    }
-
-            //   if (rightArrowDown == true)
-            //    {
-            //         player.Y+= playerSpeed;
-            //    }
-
-            //    if (LeftArrowDown == true)
-            //    {
-            //         player.Y+= playerSpeed;
-            //    }
-
-            // if (player1.Y < this.Hight)
-            //{
-            //    player.Y = 400;
-            //   
-            //}
-           // if (player1score == 5)
-           // {
-                //Pacmantimer.Enabled = false;
-               // mainmenue = "playerwon";
-            //}
-
-            Refresh();
-        }
-
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
                 case Keys.W:
-                    wDown = true;
+                    pacDirection = "up";
 
                     break;
                 case Keys.S:
-                    sDown = true;
+                    pacDirection = "down";
                     break;
 
                 case Keys.D:
-                    dDown = true;
+                    pacDirection = "right";
                     break;
 
                 case Keys.A:
-                    aDown = true;
+                    pacDirection = "left";
                     break;
 
                 case Keys.Up:
-                    upArrowDown = true;
+                    pacDirection = "up";
                     break;
 
                 case Keys.Down:
-                    downArrowDown = true;
+                    pacDirection = "down";
                     break;
 
                 case Keys.Right:
-                    rightArrowDown = true;
+                    pacDirection = "right";
                     break;
 
                 case Keys.Left:
-                    leftArrowDown = true;
+                    pacDirection = "left";
                     break;
 
                 case Keys.Space:
