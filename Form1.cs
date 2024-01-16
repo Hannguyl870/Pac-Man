@@ -14,21 +14,13 @@ namespace Pac_Man
    
     public partial class PacMan : Form
     {
-        int playerSpeed = 4;
+        int playerSpeed = 3;
         int playerscore = 0;
         string mainmenue = "waiting";
 
         SoundPlayer sp;
 
-        //bool wDown = false;
-        //bool sDown = false;
-        //bool dDown = false;
-        //bool aDown = false;
-        //bool upArrowDown = false;
-        //bool downArrowDown = false;
-        //bool rightArrowDown = false;
-        //bool leftArrowDown = false;
-
+       
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
@@ -36,19 +28,20 @@ namespace Pac_Man
         SolidBrush orangeBrush = new SolidBrush(Color.Orange);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
 
+        Rectangle homepm1 = new Rectangle(55, 100, 40, 40);
+        Rectangle homepm2 = new Rectangle(425, 178, 40, 40);
 
-       
-        Rectangle Wall1 = new Rectangle(50 ,60, 70, 5);
-        Rectangle Wall2 = new Rectangle(180, 60, 70, 5);
-        Rectangle Wall3 = new Rectangle(170, 200, 5, 125);
-        Rectangle Wall4 = new Rectangle(110, 190, 5, 90);
-        Rectangle Wall5 = new Rectangle(60, 275, 50, 5);
-        Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
-        //Rectangle Wall7 = new Rectangle(0, 125, 70, 5); 
-        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
-        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
-        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
-        //Rectangle Wall6 = new Rectangle(50, 125, 70, 5);
+        Rectangle Wall1 = new Rectangle(50 ,40, 70, 5);
+        Rectangle Wall2 = new Rectangle(200,40, 70, 5);
+        Rectangle Wall3 = new Rectangle(0, 90, 70, 5);
+        Rectangle Wall4 = new Rectangle(220,115,5,130);
+        Rectangle Wall5 = new Rectangle(155, 140,5, 90);
+        Rectangle Wall6 = new Rectangle(40, 170, 70, 5);
+        Rectangle Wall7 = new Rectangle(80, 290, 5, 70);
+        Rectangle Wall8 = new Rectangle(50, 130, 50, 5);
+        Rectangle Wall9 = new Rectangle(120, 90, 70, 5);
+        Rectangle Wall10 = new Rectangle(00, 225, 100, 5);
+        Rectangle Wall11 = new Rectangle(160, 280, 70, 5);
 
         Rectangle pacman = new Rectangle(10, 300, 20, 20);
         string pacDirection = "right";
@@ -88,6 +81,8 @@ namespace Pac_Man
                 Subtitlelable2.Text = "            or Esc to exit";
                 Scorelable.Text = "";
                 Scorelable.Visible = false;
+                e.Graphics.FillEllipse(yellowBrush, homepm1);
+                e.Graphics.FillEllipse(yellowBrush, homepm2);
             }
             else if (mainmenue == "running")
             {
@@ -105,6 +100,11 @@ namespace Pac_Man
                 e.Graphics.FillRectangle(blackBrush, Wall4);
                 e.Graphics.FillRectangle(blackBrush, Wall5);
                 e.Graphics.FillRectangle(blackBrush, Wall6);
+                e.Graphics.FillRectangle(blackBrush, Wall7);
+                e.Graphics.FillRectangle(blackBrush, Wall8);
+                e.Graphics.FillRectangle(blackBrush, Wall9);
+                e.Graphics.FillRectangle(blackBrush, Wall10);
+                e.Graphics.FillRectangle(blackBrush, Wall11);
 
                 e.Graphics.FillEllipse(yellowBrush, pacman);
 
@@ -117,7 +117,7 @@ namespace Pac_Man
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           // if (upArrowDown == true /*&& pacman.Y > this.Height*/)
+            // if (upArrowDown == true /*&& pacman.Y > this.Height*/)
             if (pacDirection == "up")
             {
                 pacman.Y -= playerSpeed;
@@ -129,41 +129,32 @@ namespace Pac_Man
                 pacman.Y += playerSpeed;
 
             }
-          
+
             if (pacDirection == "right")
             {
                 pacman.X += playerSpeed;
             }
 
-            if (pacDirection == "left ")
+            if (pacDirection == "left")
             {
-                pacman.X += playerSpeed;
+                pacman.X -= playerSpeed;
             }
-
-            if (pacDirection == "up ")
-            {
-                pacman.Y -= playerSpeed;
-            }
-            if (pacDirection == "down")
-            {
-                pacman.Y += playerSpeed;
-
-            }
-            if (pacDirection == "right")
-            {
-                pacman.X += playerSpeed;
-            }
-
-            if (pacDirection == "left ")
-            {
-                pacman.X += playerSpeed;
-            }
-
+            // pac man appears on otherside of screen once gone over boundries 
             if (pacman.Y > this.Height)
             {
-                pacman.Y = 300;
-                pacman.X = 10;
-
+                pacman.Y = pacman.Y - this.Height;
+            }
+            if (pacman.Y < 0)
+            {
+                pacman.Y = pacman.Y + this.Height;
+            }
+            if (pacman.X > this.Width)
+            {
+                pacman.X = pacman.X - this.Width;
+            }
+            if (pacman.X < 0)
+            {
+                pacman.X = pacman.X + this.Width;
             }
             if (playerscore == 5)
             {
@@ -171,7 +162,50 @@ namespace Pac_Man
                 mainmenue = "playerwon";
             }
 
+            //player intersects with walls
+            wallintersection();
+
             Refresh();
+        }
+
+        private void wallintersection()
+        {
+            if (pacman.IntersectsWith(Wall1))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall2))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall3))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall4))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall5))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall6))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
