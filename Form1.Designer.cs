@@ -34,6 +34,7 @@
             this.Subtitlelable2 = new System.Windows.Forms.Label();
             this.pacmantimer = new System.Windows.Forms.Timer(this.components);
             this.Scorelable = new System.Windows.Forms.Label();
+            this.playerlifelable = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // Titlelable
@@ -75,15 +76,24 @@
             // 
             // Scorelable
             // 
-            this.Scorelable.AutoSize = true;
             this.Scorelable.BackColor = System.Drawing.Color.Transparent;
             this.Scorelable.Font = new System.Drawing.Font("Algerian", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Scorelable.Location = new System.Drawing.Point(338, 9);
+            this.Scorelable.Location = new System.Drawing.Point(41, 9);
             this.Scorelable.Name = "Scorelable";
             this.Scorelable.Size = new System.Drawing.Size(114, 19);
             this.Scorelable.TabIndex = 3;
             this.Scorelable.Text = "Scorelable";
             this.Scorelable.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // playerlifelable
+            // 
+            this.playerlifelable.BackColor = System.Drawing.Color.Transparent;
+            this.playerlifelable.Font = new System.Drawing.Font("Algerian", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.playerlifelable.Location = new System.Drawing.Point(617, 9);
+            this.playerlifelable.Name = "playerlifelable";
+            this.playerlifelable.Size = new System.Drawing.Size(176, 23);
+            this.playerlifelable.TabIndex = 4;
+            this.playerlifelable.Text = "playerlifelable";
             // 
             // PacMan
             // 
@@ -91,6 +101,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.MidnightBlue;
             this.ClientSize = new System.Drawing.Size(800, 400);
+            this.Controls.Add(this.playerlifelable);
             this.Controls.Add(this.Scorelable);
             this.Controls.Add(this.Subtitlelable2);
             this.Controls.Add(this.Subtitlelable1);
@@ -103,7 +114,6 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyUp);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -114,6 +124,7 @@
         private System.Windows.Forms.Label Subtitlelable2;
         private System.Windows.Forms.Timer pacmantimer;
         private System.Windows.Forms.Label Scorelable;
+        private System.Windows.Forms.Label playerlifelable;
     }
 }
 

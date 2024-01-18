@@ -11,31 +11,36 @@ using System.Windows.Forms;
 
 namespace Pac_Man
 {
-   
+
     public partial class PacMan : Form
     {
         int playerSpeed = 3;
+        int ghostspeed = 2;
         int playerscore = 0;
+        int playerlife = 3;
+        int size = 10;
         string mainmenue = "waiting";
+        string pacDirection = "right";
 
         SoundPlayer sp;
 
-       
+        List<Rectangle> points = new List<Rectangle>();
+
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
         SolidBrush redBrush = new SolidBrush(Color.Red);
         SolidBrush blueBrush = new SolidBrush(Color.Blue);
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush orangeBrush = new SolidBrush(Color.Orange);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
-
+     //pacman on homepage 
         Rectangle homepm1 = new Rectangle(55, 100, 40, 40);
         Rectangle homepm2 = new Rectangle(425, 178, 40, 40);
-
-        Rectangle Wall1 = new Rectangle(50 ,40, 70, 5);
-        Rectangle Wall2 = new Rectangle(200,40, 70, 5);
+     //walls 
+        Rectangle Wall1 = new Rectangle(50, 40, 70, 5);
+        Rectangle Wall2 = new Rectangle(200, 40, 70, 5);
         Rectangle Wall3 = new Rectangle(0, 90, 70, 5);
-        Rectangle Wall4 = new Rectangle(220,115,5,130);
-        Rectangle Wall5 = new Rectangle(155, 140,5, 90);
+        Rectangle Wall4 = new Rectangle(220, 115, 5, 130);
+        Rectangle Wall5 = new Rectangle(155, 140, 5, 90);
         Rectangle Wall6 = new Rectangle(40, 170, 70, 5);
         Rectangle Wall7 = new Rectangle(80, 290, 5, 70);
         Rectangle Wall8 = new Rectangle(50, 130, 50, 5);
@@ -62,14 +67,16 @@ namespace Pac_Man
         Rectangle Wall29 = new Rectangle(320, 130, 30, 5);
         Rectangle Wall30 = new Rectangle(430, 150, 80, 5);
         Rectangle Wall31 = new Rectangle(430, 90, 25, 5);
-        Rectangle Wall32 = new Rectangle(500, 50, 40, 5);//w
-        Rectangle Wall33 = new Rectangle(540, 100, 5, 30);
+        Rectangle Wall32 = new Rectangle(500, 50, 40, 5);
+        Rectangle Wall33 = new Rectangle(550, 90, 5, 40);
         Rectangle Wall34 = new Rectangle(430, 130, 5, 20);
-        Rectangle Wall35 = new Rectangle(430, 90, 25, 5);
+        Rectangle Wall35 = new Rectangle(540, 35, 5, 20);
 
+    //pacman
+        Rectangle pacman = new Rectangle(300, 300, 20, 20);
+    //ghosts 
+        Rectangle ghost1 = new Rectangle(10, 40, 25, 15);
 
-        Rectangle pacman = new Rectangle(10, 300, 20, 20);
-        string pacDirection = "right";
 
 
         public PacMan()
@@ -78,7 +85,7 @@ namespace Pac_Man
         }
         public void GameInitialize()
         {
-          
+
             Titlelable.Visible = false;
             Subtitlelable1.Visible = false;
             Subtitlelable2.Visible = false;
@@ -86,6 +93,8 @@ namespace Pac_Man
             Subtitlelable1.Text = "";
             Subtitlelable2.Text = "";
             Scorelable.Text = "0";
+
+            points.Clear();
 
             pacmantimer.Enabled = true;
 
@@ -95,7 +104,7 @@ namespace Pac_Man
 
         private void PacMan_Paint(object sender, PaintEventArgs e)
         {
-          
+
             if (mainmenue == "waiting")
             {
 
@@ -105,20 +114,23 @@ namespace Pac_Man
                 Subtitlelable1.Text = "               Press Space to start";
                 Subtitlelable2.Text = "            or Esc to exit";
                 Scorelable.Text = "";
+                playerlifelable.Text = "";
+                playerlifelable.Visible = false;
                 Scorelable.Visible = false;
                 e.Graphics.FillEllipse(yellowBrush, homepm1);
                 e.Graphics.FillEllipse(yellowBrush, homepm2);
             }
             else if (mainmenue == "running")
             {
-               
+
                 Titlelable.Visible = false;
                 Subtitlelable1.Visible = false;
                 Subtitlelable2.Visible = false;
-
+                playerlifelable.Text = $"{playerlife}";
                 Scorelable.Visible = true;
+                playerlifelable.Visible = true;
                 Scorelable.Text = $"{playerscore}";
-
+            //walls 
                 e.Graphics.FillRectangle(blackBrush, Wall1);
                 e.Graphics.FillRectangle(blackBrush, Wall2);
                 e.Graphics.FillRectangle(blackBrush, Wall3);
@@ -150,19 +162,34 @@ namespace Pac_Man
                 e.Graphics.FillRectangle(blackBrush, Wall29);
                 e.Graphics.FillRectangle(blackBrush, Wall30);
                 e.Graphics.FillRectangle(blackBrush, Wall31);
-                e.Graphics.FillRectangle(redBrush, Wall32);//w
-                e.Graphics.FillRectangle(orangeBrush, Wall33);
-                e.Graphics.FillRectangle(yellowBrush, Wall34);
-                e.Graphics.FillRectangle(blueBrush, Wall35);
-
+                e.Graphics.FillRectangle(blackBrush, Wall32);
+                e.Graphics.FillRectangle(blackBrush, Wall33);
+                e.Graphics.FillRectangle(blackBrush, Wall34);
+                e.Graphics.FillRectangle(blackBrush, Wall35);
+            //pacman
                 e.Graphics.FillEllipse(yellowBrush, pacman);
+            // ghosts 
+                e.Graphics.FillEllipse(blueBrush, ghost1);
 
+            }
+            else if (mainmenue =="player lost")
+            {
+                Titlelable.Text = "YOU LOST";
+                Subtitlelable1.Text = "PRESS SPACE TO TRY AGIN";
+                Subtitlelable2.Text = "OR ESC TO EXIT ";
+                Scorelable.Text = $"{playerscore}";
+                playerlifelable.Text = $"{playerlife}";
+                playerlifelable.Visible = true; 
+                Scorelable.Visible = true;
+            }
+            else if (mainmenue == "player won")
+            {
 
             }
         }
-       
 
-     
+
+
 
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -205,10 +232,17 @@ namespace Pac_Man
             {
                 pacman.X = pacman.X + this.Width;
             }
-            if (playerscore == 5)
+
+            //player lifes 
+            if (playerlife == 0)
             {
-                pacmantimer.Enabled = false;
-                mainmenue = "playerwon";
+                mainmenue = "player lost";
+            }
+            if (pacman.IntersectsWith(ghost1))
+            {
+                playerlife--;
+                pacman.X = 300;
+                pacman.Y = 300;
             }
 
             //player intersects with walls
@@ -222,132 +256,216 @@ namespace Pac_Man
             if (pacman.IntersectsWith(Wall1))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall2))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall3))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall4))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall5))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall6))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall7))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall8))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall9))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall10))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall11))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall12))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall13))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall14))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall15))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall16))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall17))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall18))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall19))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall20))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
             if (pacman.IntersectsWith(Wall21))
             {
                 playerscore--;
-                pacman.X = 10;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall22))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall23))
+            {
+                playerscore--;
+                pacman.X = 300;
                 pacman.Y = 300;
             }
 
-        }
+            if (pacman.IntersectsWith(Wall24))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall25))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall26))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall27))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall28))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall29))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall30))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
 
+            }
+            if (pacman.IntersectsWith(Wall31))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall32))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall33))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall34))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall35))
+            {
+                playerscore--;
+                pacman.X = 300;
+                pacman.Y = 300;
+            }
+        }
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -398,6 +516,7 @@ namespace Pac_Man
                     break;
             }
         }
+
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -448,5 +567,7 @@ namespace Pac_Man
                     break;
             }
         }
+
     }
 }
+
