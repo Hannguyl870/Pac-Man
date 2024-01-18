@@ -41,7 +41,32 @@ namespace Pac_Man
         Rectangle Wall8 = new Rectangle(50, 130, 50, 5);
         Rectangle Wall9 = new Rectangle(120, 90, 70, 5);
         Rectangle Wall10 = new Rectangle(00, 225, 100, 5);
-        Rectangle Wall11 = new Rectangle(160, 280, 70, 5);
+        Rectangle Wall11 = new Rectangle(140, 280, 70, 5);
+        Rectangle Wall12 = new Rectangle(320, 0, 5, 90);
+        Rectangle Wall13 = new Rectangle(260, 280, 5, 70);
+        Rectangle Wall14 = new Rectangle(280, 230, 70, 5);
+        Rectangle Wall15 = new Rectangle(280, 90, 5, 100);
+        Rectangle Wall16 = new Rectangle(500, 185, 5, 140);
+        Rectangle Wall17 = new Rectangle(390, 230, 70, 5);
+        Rectangle Wall18 = new Rectangle(545, 280, 20, 5);
+        Rectangle Wall19 = new Rectangle(505, 235, 40, 5);
+        Rectangle Wall20 = new Rectangle(560, 190, 40, 5);
+        Rectangle Wall21 = new Rectangle(310, 280, 140, 5);
+        Rectangle Wall22 = new Rectangle(450, 0, 5, 90);
+        Rectangle Wall23 = new Rectangle(360, 40, 50, 5);
+        Rectangle Wall24 = new Rectangle(320, 90, 60, 5);
+        Rectangle Wall25 = new Rectangle(380, 90, 5, 60);
+        Rectangle Wall26 = new Rectangle(320, 130, 5, 65);
+        Rectangle Wall27 = new Rectangle(360, 190, 80, 5);
+        Rectangle Wall28 = new Rectangle(500, 50, 5, 60);
+        Rectangle Wall29 = new Rectangle(320, 130, 30, 5);
+        Rectangle Wall30 = new Rectangle(430, 150, 80, 5);
+        Rectangle Wall31 = new Rectangle(430, 90, 25, 5);
+        Rectangle Wall32 = new Rectangle(500, 50, 40, 5);//w
+        Rectangle Wall33 = new Rectangle(540, 100, 5, 30);
+        Rectangle Wall34 = new Rectangle(430, 130, 5, 20);
+        Rectangle Wall35 = new Rectangle(430, 90, 25, 5);
+
 
         Rectangle pacman = new Rectangle(10, 300, 20, 20);
         string pacDirection = "right";
@@ -105,6 +130,30 @@ namespace Pac_Man
                 e.Graphics.FillRectangle(blackBrush, Wall9);
                 e.Graphics.FillRectangle(blackBrush, Wall10);
                 e.Graphics.FillRectangle(blackBrush, Wall11);
+                e.Graphics.FillRectangle(blackBrush, Wall12);
+                e.Graphics.FillRectangle(blackBrush, Wall13);
+                e.Graphics.FillRectangle(blackBrush, Wall14);
+                e.Graphics.FillRectangle(blackBrush, Wall15);
+                e.Graphics.FillRectangle(blackBrush, Wall16);
+                e.Graphics.FillRectangle(blackBrush, Wall17);
+                e.Graphics.FillRectangle(blackBrush, Wall18);
+                e.Graphics.FillRectangle(blackBrush, Wall19);
+                e.Graphics.FillRectangle(blackBrush, Wall20);
+                e.Graphics.FillRectangle(blackBrush, Wall21);
+                e.Graphics.FillRectangle(blackBrush, Wall22);
+                e.Graphics.FillRectangle(blackBrush, Wall23);
+                e.Graphics.FillRectangle(blackBrush, Wall24);
+                e.Graphics.FillRectangle(blackBrush, Wall25);
+                e.Graphics.FillRectangle(blackBrush, Wall26);
+                e.Graphics.FillRectangle(blackBrush, Wall27);
+                e.Graphics.FillRectangle(blackBrush, Wall28);
+                e.Graphics.FillRectangle(blackBrush, Wall29);
+                e.Graphics.FillRectangle(blackBrush, Wall30);
+                e.Graphics.FillRectangle(blackBrush, Wall31);
+                e.Graphics.FillRectangle(redBrush, Wall32);//w
+                e.Graphics.FillRectangle(orangeBrush, Wall33);
+                e.Graphics.FillRectangle(yellowBrush, Wall34);
+                e.Graphics.FillRectangle(blueBrush, Wall35);
 
                 e.Graphics.FillEllipse(yellowBrush, pacman);
 
@@ -206,6 +255,97 @@ namespace Pac_Man
                 pacman.X = 10;
                 pacman.Y = 300;
             }
+            if (pacman.IntersectsWith(Wall7))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall8))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall9))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall10))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall11))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall12))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall13))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall14))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall15))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall16))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall17))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall18))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall19))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall20))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+            if (pacman.IntersectsWith(Wall21))
+            {
+                playerscore--;
+                pacman.X = 10;
+                pacman.Y = 300;
+            }
+
         }
 
         private void Form1_KeyUp(object sender, KeyEventArgs e)
