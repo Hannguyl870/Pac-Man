@@ -21,6 +21,8 @@ namespace Pac_Man
         int size = 10;
         string mainmenue = "waiting";
         string pacDirection = "right";
+        string ghost1Direction = "right";
+        string ghost2Direction = "down";
 
         SoundPlayer sp;
 
@@ -75,7 +77,8 @@ namespace Pac_Man
     //pacman
         Rectangle pacman = new Rectangle(300, 300, 20, 20);
     //ghosts 
-        Rectangle ghost1 = new Rectangle(10, 40, 25, 15);
+        Rectangle ghost1 = new Rectangle(10, 50, 15, 25);
+        Rectangle ghost2 = new Rectangle(470,20,15,25);
 
 
 
@@ -130,6 +133,8 @@ namespace Pac_Man
                 Scorelable.Visible = true;
                 playerlifelable.Visible = true;
                 Scorelable.Text = $"{playerscore}";
+
+               
             //walls 
                 e.Graphics.FillRectangle(blackBrush, Wall1);
                 e.Graphics.FillRectangle(blackBrush, Wall2);
@@ -170,12 +175,13 @@ namespace Pac_Man
                 e.Graphics.FillEllipse(yellowBrush, pacman);
             // ghosts 
                 e.Graphics.FillEllipse(blueBrush, ghost1);
+                e.Graphics.FillEllipse(redBrush, ghost2);
 
             }
             else if (mainmenue =="player lost")
             {
                 Titlelable.Text = "YOU LOST";
-                Subtitlelable1.Text = "PRESS SPACE TO TRY AGIN";
+                Subtitlelable1.Text = "PRESS SPACE TO TRY AGAIN";
                 Subtitlelable2.Text = "OR ESC TO EXIT ";
                 Scorelable.Text = $"{playerscore}";
                 playerlifelable.Text = $"{playerlife}";
@@ -184,7 +190,13 @@ namespace Pac_Man
             }
             else if (mainmenue == "player won")
             {
-
+                Titlelable.Text = "YOU WIN";
+                Subtitlelable1.Text = "PRESS SPACE TO PLAY AGAIN";
+                Subtitlelable2.Text = "OR ESC TO EXIT ";
+                Scorelable.Text = $"{playerscore}";
+                playerlifelable.Text = $"{playerlife}";
+                playerlifelable.Visible = true;
+                Scorelable.Visible = true;
             }
         }
 
@@ -193,7 +205,7 @@ namespace Pac_Man
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            // if (upArrowDown == true /*&& pacman.Y > this.Height*/)
+           
             if (pacDirection == "up")
             {
                 pacman.Y -= playerSpeed;
@@ -215,6 +227,7 @@ namespace Pac_Man
             {
                 pacman.X -= playerSpeed;
             }
+
             // pac man appears on otherside of screen once gone over boundries 
             if (pacman.Y > this.Height)
             {
@@ -248,6 +261,90 @@ namespace Pac_Man
             //player intersects with walls
             wallintersection();
 
+            // moving ghost1 
+            if (ghost1Direction == "right")
+            {
+                ghost1.X += ghostspeed;
+               
+            }
+            else if (ghost1Direction == "left")
+            {
+                ghost1.X -= ghostspeed;
+               
+            }
+            else if (ghost1Direction == "up")
+            {
+                ghost1.Y -= ghostspeed;
+              
+            }
+            else if (ghost1Direction == "down")
+            {
+                ghost1.Y += ghostspeed;
+               
+            }
+
+            //moving ghost 2
+            if (ghost2Direction == "right")
+            {
+                ghost2.X += ghostspeed;
+
+            }
+            else if (ghost2Direction == "left")
+            {
+                ghost2.X -= ghostspeed;
+
+            }
+            else if (ghost2Direction == "up")
+            {
+                ghost2.Y -= ghostspeed;
+
+            }
+            else if (ghost2Direction == "down")
+            {
+                ghost2.Y += ghostspeed;
+
+            }
+            //ghost 1 pattern
+            if (ghost1.X > 270 && ghost1Direction =="right")
+            {
+                ghost1Direction = "up";
+            }
+            if ((ghost1.Y < 10 && ghost1Direction == "up"))
+            {
+                ghost1Direction = "left";
+            }
+            if ((ghost1.X < 30 && ghost1Direction == "left"))
+            {
+                ghost1Direction = "down";
+            }
+            if ((ghost1.Y > 50 && ghost1Direction == "down"))
+            {
+                ghost1Direction = "right";
+            }
+
+            //ghost2 pattern 
+            if (ghost2.Y > 110 && ghost2Direction == "down")
+            {
+                ghost2Direction = "right";
+            }
+            if ((ghost2.X > 515 && ghost2Direction == "right"))
+            {
+                ghost2Direction = "up";
+            }
+            if ((ghost2.Y < 60 && ghost2Direction == "up"))
+            {
+                ghost2Direction = "right";
+            }
+            if ((ghost2.X >= 570 && ghost2Direction == "right"))
+            {
+                ghost2Direction = "up";
+            }
+            if ((ghost2.Y <20 && ghost2Direction == "up"))
+            {
+                ghost2Direction = "left";
+            }
+
+
             Refresh();
         }
 
@@ -258,6 +355,7 @@ namespace Pac_Man
                 playerscore--;
                 pacman.X = 300;
                 pacman.Y = 300;
+                
             }
             if (pacman.IntersectsWith(Wall2))
             {
