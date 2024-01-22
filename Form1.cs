@@ -23,6 +23,7 @@ namespace Pac_Man
         string pacDirection = "right";
         string ghost1Direction = "right";
         string ghost2Direction = "down";
+        string ghost3Direction = "right";
 
         SoundPlayer sp;
 
@@ -34,7 +35,8 @@ namespace Pac_Man
         SolidBrush whiteBrush = new SolidBrush(Color.White);
         SolidBrush orangeBrush = new SolidBrush(Color.Orange);
         SolidBrush blackBrush = new SolidBrush(Color.Black);
-     //pacman on homepage 
+        SolidBrush transparentBrush = new SolidBrush(Color.Transparent);
+        //pacman on homepage 
         Rectangle homepm1 = new Rectangle(55, 100, 40, 40);
         Rectangle homepm2 = new Rectangle(425, 178, 40, 40);
      //walls 
@@ -79,8 +81,9 @@ namespace Pac_Man
     //ghosts 
         Rectangle ghost1 = new Rectangle(10, 50, 15, 25);
         Rectangle ghost2 = new Rectangle(470,20,15,25);
+        Rectangle ghost3 = new Rectangle(510,300,15,25);
 
-
+        Rectangle invadot = new Rectangle(430, 160, 20, 20);
 
         public PacMan()
         {
@@ -176,6 +179,9 @@ namespace Pac_Man
             // ghosts 
                 e.Graphics.FillEllipse(blueBrush, ghost1);
                 e.Graphics.FillEllipse(redBrush, ghost2);
+                e.Graphics.FillEllipse(orangeBrush, ghost3);
+
+                e.Graphics.FillEllipse(transparentBrush,invadot);
 
             }
             else if (mainmenue =="player lost")
@@ -304,6 +310,27 @@ namespace Pac_Man
                 ghost2.Y += ghostspeed;
 
             }
+            // moving ghost3 
+            if (ghost3Direction == "right")
+            {
+                ghost3.X += ghostspeed;
+
+            }
+            else if (ghost3Direction == "left")
+            {
+                ghost3.X -= ghostspeed;
+
+            }
+            else if (ghost3Direction == "up")
+            {
+                ghost3.Y -= ghostspeed;
+
+            }
+            else if (ghost3Direction == "down")
+            {
+                ghost3.Y += ghostspeed;
+
+            }
             //ghost 1 pattern
             if (ghost1.X > 270 && ghost1Direction =="right")
             {
@@ -339,9 +366,49 @@ namespace Pac_Man
             {
                 ghost2Direction = "up";
             }
-            if ((ghost2.Y <20 && ghost2Direction == "up"))
+            if ((ghost2.Y <7 && ghost2Direction == "up"))
             {
                 ghost2Direction = "left";
+            }
+            if (ghost2.X <470 && ghost2Direction == "left")
+            {
+                ghost2Direction = "down";
+            }
+
+            //ghost3 pattern 
+            if (ghost3.X >= 570 && ghost3Direction == "right")
+            {
+                ghost3Direction = "up";
+            }
+            if ((ghost3.Y <= 200 && ghost3Direction == "up"))
+            {
+                ghost3Direction = "left";
+            }
+            if (ghost3.X <= 515 && ghost3Direction == "left")
+            {
+                ghost3Direction = "up";
+            }
+            if (ghost3.Y <= 160 && ghost3Direction == "up")
+            {
+                ghost3Direction = "left";
+            }
+            if (ghost3.X <= 340 && ghost3Direction == "left")
+            {
+                ghost3Direction = "down";
+            }   
+            if (ghost3.Y >= 197 && ghost3Direction == "down")
+            {
+                ghost3Direction = "right";
+            }
+            if (ghost3.X >= 450 && ghost3.Y<= 200 && ghost3Direction == "right")
+            {
+                ghost3Direction = "up";
+                
+            }
+            if (ghost3.Y < 160 && ghost3.IntersectsWith(invadot) && ghost3Direction == "up")
+            {
+                ghost3Direction = "right";
+               
             }
 
 
