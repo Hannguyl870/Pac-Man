@@ -83,7 +83,12 @@ namespace Pac_Man
         Rectangle ghost2 = new Rectangle(470,20,15,25);
         Rectangle ghost3 = new Rectangle(510,300,15,25);
 
-        Rectangle invadot = new Rectangle(430, 160, 20, 20);
+        Rectangle Inva1= new Rectangle(460, 155, 20, 10);
+        Rectangle Inva2 = new Rectangle(460, 220, 20, 10);
+        Rectangle Inva3 = new Rectangle(320, 220, 20, 10);
+        Rectangle Inva4 = new Rectangle(320, 155, 20, 10);
+        Rectangle Inva5 = new Rectangle(510, 155, 20, 10);
+
 
         public PacMan()
         {
@@ -181,7 +186,11 @@ namespace Pac_Man
                 e.Graphics.FillEllipse(redBrush, ghost2);
                 e.Graphics.FillEllipse(orangeBrush, ghost3);
 
-                e.Graphics.FillEllipse(transparentBrush,invadot);
+                e.Graphics.FillRectangle(transparentBrush,Inva1);
+                e.Graphics.FillRectangle(transparentBrush, Inva2);
+                e.Graphics.FillRectangle(transparentBrush, Inva3);
+                e.Graphics.FillRectangle(transparentBrush, Inva4);
+                e.Graphics.FillRectangle(redBrush, Inva5);
 
             }
             else if (mainmenue =="player lost")
@@ -388,27 +397,39 @@ namespace Pac_Man
             {
                 ghost3Direction = "up";
             }
-            if (ghost3.Y <= 160 && ghost3Direction == "up")
+            if (ghost3.Y <= 160 && ghost3Direction == "up")// exit 
             {
                 ghost3Direction = "left";
             }
-            if (ghost3.X <= 340 && ghost3Direction == "left")
+            if (/*ghost3.X <= 450 &&*/ ghost3.IntersectsWith(Inva4)&& ghost3Direction == "left")
             {
                 ghost3Direction = "down";
-            }   
-            if (ghost3.Y >= 197 && ghost3Direction == "down")
+            }
+            if (/*ghost3.Y >= 197*/ /*&&*/ ghost3.IntersectsWith(Inva3) && ghost3Direction == "down")
             {
                 ghost3Direction = "right";
             }
-            if (ghost3.X >= 450 && ghost3.Y<= 200 && ghost3Direction == "right")
+            if (/*ghost3.X >= 450 &&*//* ghost3.Y <= 200*/ ghost3.IntersectsWith (Inva2)&& ghost3Direction == "right")
             {
                 ghost3Direction = "up";
-                
+
             }
-            if (ghost3.Y < 160 && ghost3.IntersectsWith(invadot) && ghost3Direction == "up")
+            if (ghost3.Y >= 150 && ghost3.IntersectsWith(Inva1) && ghost3Direction == "up")
             {
                 ghost3Direction = "right";
-               
+
+            }
+            if (ghost3.X >= 520 && ghost3.IntersectsWith(Inva5) && ghost3Direction == "right")
+            {
+                ghost3Direction = "down";
+            }
+            if (ghost3.Y >= 205 && ghost3Direction == "down")
+            {
+                ghost3Direction = "right";
+            }
+            if (ghost3.X >= 570 && ghost3.IntersectsWith(Inva5) && ghost3Direction == "right")
+            {
+                ghost3Direction = "down";
             }
 
 
