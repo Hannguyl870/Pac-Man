@@ -25,6 +25,7 @@ namespace Pac_Man
         string ghost2Direction = "down";
         string ghost3Direction = "right";
 
+        Random randgen = new Random();
         SoundPlayer sp;
 
         List<Rectangle> points = new List<Rectangle>();
@@ -93,7 +94,79 @@ namespace Pac_Man
         Rectangle Inva8 = new Rectangle(505, 260, 15, 40);
         Rectangle Inva9 = new Rectangle(590, 300, 45, 10);
      //points
-        Rectangle P1 = new Rectangle(280, 280, 10, 10);
+        Rectangle P1= new Rectangle(20, 300,10,10);//row 1
+        Rectangle P2 = new Rectangle(100, 300, 10, 10);
+        Rectangle P3 = new Rectangle(180, 300, 10, 10);
+        Rectangle P4 = new Rectangle(270, 300, 10, 10);
+        Rectangle P5 = new Rectangle(320, 300, 10, 10);
+        Rectangle P6 = new Rectangle(400, 300, 10, 10);
+        Rectangle P7 = new Rectangle(480, 300, 10, 10);
+
+        Rectangle P8= new Rectangle(20, 250, 10, 10);//row2
+        Rectangle P9 = new Rectangle(100, 250, 10, 10);
+        Rectangle P10= new Rectangle(180, 250, 10, 10);
+        Rectangle P11= new Rectangle(260, 250, 10, 10);
+        Rectangle P12= new Rectangle(320, 250, 10, 10);
+        Rectangle P13= new Rectangle(400, 250, 10, 10);
+        Rectangle P14= new Rectangle(480, 250, 10, 10);
+
+        Rectangle P15= new Rectangle(20, 210, 10, 10);//row3
+        Rectangle P16= new Rectangle(100, 210, 10, 10);
+        Rectangle P17 = new Rectangle(180, 210, 10, 10);
+        Rectangle P18 = new Rectangle(260, 210, 10, 10);
+        Rectangle P19 = new Rectangle(320, 210,10, 10);
+        Rectangle P20 = new Rectangle(400, 210, 10, 10);
+        Rectangle P21 = new Rectangle(480, 210, 10, 10);
+
+        Rectangle P22 = new Rectangle(20, 150, 10, 10);//row4
+        Rectangle P23 = new Rectangle(100, 150, 10, 10);
+        Rectangle P24 = new Rectangle(180, 150, 10, 10);
+        Rectangle P25 = new Rectangle(260, 150, 10, 10);
+        Rectangle P26 = new Rectangle(340, 160, 10, 10);
+        Rectangle P27 = new Rectangle(400, 160, 10, 10);
+        Rectangle P28 = new Rectangle(480, 170, 10, 10);
+
+        Rectangle P29 = new Rectangle(20, 105, 10, 10);//row5
+        Rectangle P30 = new Rectangle(100, 105, 10, 10);
+        Rectangle P31 = new Rectangle(180, 105, 10, 10);
+        Rectangle P32 = new Rectangle(260, 105, 10, 10);
+        Rectangle P33 = new Rectangle(320, 105, 10, 10);
+        Rectangle P34 = new Rectangle(400, 105, 10, 10);
+        Rectangle P35 = new Rectangle(480, 115, 10, 10);
+
+        Rectangle P36= new Rectangle(20, 60, 10, 10);//row6
+        Rectangle P37 = new Rectangle(100, 60, 10, 10);
+        Rectangle P38 = new Rectangle(180, 60, 10, 10);
+        Rectangle P39 = new Rectangle(260, 60, 10, 10);
+        Rectangle P40 = new Rectangle(340, 60, 10, 10);
+        Rectangle P41 = new Rectangle(400, 60, 10, 10);
+        Rectangle P42 = new Rectangle(480, 60, 10, 10);
+
+        Rectangle P43 = new Rectangle(20, 10, 10, 10);//row7
+        Rectangle P44 = new Rectangle(100, 10, 10, 10);
+        Rectangle P45 = new Rectangle(180, 10, 10, 10);
+        Rectangle P46 = new Rectangle(260, 10, 10, 10);
+        Rectangle P47 = new Rectangle(340, 10, 10, 10);
+        Rectangle P48 = new Rectangle(400, 10, 10, 10);
+        Rectangle P49 = new Rectangle(480, 10, 10, 10);
+
+        Rectangle P50 = new Rectangle(570, 10, 10, 10);//vertical row right
+        Rectangle P51 = new Rectangle(570, 60, 10, 10);
+        Rectangle P52 = new Rectangle(570, 105, 10, 10);
+        Rectangle P53 = new Rectangle(570, 160, 10, 10);
+        Rectangle P54 = new Rectangle(570, 210, 10, 10);
+        Rectangle P55 = new Rectangle(570, 250, 10, 10);
+        Rectangle P56 = new Rectangle(570, 300, 10, 10);
+
+        Rectangle P57 = new Rectangle(520, 10, 10, 10);//random
+        Rectangle P58 = new Rectangle(520, 60, 10, 10);
+        Rectangle P59 = new Rectangle(520, 115, 10, 10);
+        Rectangle P60 = new Rectangle(520, 160, 10, 10);
+        Rectangle P61 = new Rectangle(520, 210, 10, 10);
+        Rectangle P62 = new Rectangle(520, 250, 10, 10);
+        Rectangle P63 = new Rectangle(520, 300, 10, 10);
+
+
 
         public PacMan()
         {
@@ -111,6 +184,69 @@ namespace Pac_Man
             Scorelable.Text = "0";
 
             points.Clear();
+            points.Add(P1);
+            points.Add(P2);
+            points.Add(P3);
+            points.Add(P4);
+            points.Add(P5);
+            points.Add(P6);
+            points.Add(P7);
+            points.Add(P8);
+            points.Add(P9);
+            points.Add(P10);
+            points.Add(P11);
+            points.Add(P12);
+            points.Add(P13);
+            points.Add(P14);
+            points.Add(P15);
+            points.Add(P16);
+            points.Add(P17);
+            points.Add(P18);
+            points.Add(P19);
+            points.Add(P20);
+            points.Add(P21);
+            points.Add(P22);
+            points.Add(P23);
+            points.Add(P24);
+            points.Add(P25);
+            points.Add(P26);
+            points.Add(P27);
+            points.Add(P28);
+            points.Add(P29);
+            points.Add(P30);
+            points.Add(P31);
+            points.Add(P32);
+            points.Add(P33);
+            points.Add(P34);
+            points.Add(P35);
+            points.Add(P36);
+            points.Add(P37);
+            points.Add(P38);
+            points.Add(P39);
+            points.Add(P40);
+            points.Add(P41);
+            points.Add(P42);
+            points.Add(P43);
+            points.Add(P44);
+            points.Add(P45);
+            points.Add(P46);
+            points.Add(P47);
+            points.Add(P48);
+            points.Add(P49);
+            points.Add(P50);
+            points.Add(P51);
+            points.Add(P52);
+            points.Add(P53);
+            points.Add(P54);
+            points.Add(P55);
+            points.Add(P56);
+            points.Add(P57);
+            points.Add(P58);
+            points.Add(P59);
+            points.Add(P60);
+            points.Add(P61);
+            points.Add(P62);
+            points.Add(P63);
 
             pacmantimer.Enabled = true;
 
@@ -200,18 +336,22 @@ namespace Pac_Man
                 e.Graphics.FillRectangle(transparentBrush, Inva7);
                 e.Graphics.FillRectangle(transparentBrush, Inva8);
                 e.Graphics.FillRectangle(transparentBrush, Inva9);
-             //points
-                e.Graphics.FillEllipse(whiteBrush, P1);
+                //points
+                for (int i = 0; i < points.Count; i++)
+                {
+                    e.Graphics.FillEllipse(whiteBrush, points[i]);
+                }
             }
             else if (mainmenue =="player lost")
             {
+                playerlifelable.Visible = false;
+                Scorelable.Visible = false;
+                Titlelable.Visible = true;
+                Subtitlelable1.Visible = true;
+                Subtitlelable2.Visible = true;
                 Titlelable.Text = "YOU LOST";
                 Subtitlelable1.Text = "PRESS SPACE TO TRY AGAIN";
                 Subtitlelable2.Text = "OR ESC TO EXIT ";
-                Scorelable.Text = $"{playerscore}";
-                playerlifelable.Text = $"{playerlife}";
-                playerlifelable.Visible = true; 
-                Scorelable.Visible = true;
             }
             else if (mainmenue == "player won")
             {
@@ -272,19 +412,49 @@ namespace Pac_Man
             }
 
             //player lifes 
-            if (playerlife == 0)
-            {
-                mainmenue = "player lost";
-            }
+            //if (playerlife < 0)
+            //{
+            //    mainmenue = "player lost";
+            //}
             if (player.IntersectsWith(ghost1))
             {
                 playerlife--;
                 player.X = 300;
                 player.Y = 300;
             }
+            if (player.IntersectsWith(ghost2))
+            {
+                playerlife--;
+                player.X = 300;
+                player.Y = 300;
+            }
+            if (player.IntersectsWith(ghost3))
+            {
+                playerlife--;
+                player.X = 300;
+                player.Y = 300;
+            }
+            //if (playerscore<0)
+            //{
+            //    playerlife--;
+            //    player.X = 300;
+            //    player.Y = 300;
+            //}
             //player points
-            //if (player.IntersectsWith(points))
-            //player intersects with walls
+
+            for (int i = 0; i < points.Count; i++)
+            {
+                if (player.IntersectsWith(points[i]))
+                {
+                    playerscore++;
+                    points.RemoveAt(i);
+                    break; 
+                   
+                }
+            }
+
+
+          
             wallintersection();
 
             // moving ghost1 
