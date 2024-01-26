@@ -89,7 +89,7 @@ namespace Pac_Man
         Rectangle ghost1 = new Rectangle(10, 50, 15, 25);
         Rectangle ghost2 = new Rectangle(470,20,15,25);
         Rectangle ghost3 = new Rectangle(510,300,15,25);
-
+//inviable POINTS 
         Rectangle Inva1= new Rectangle(465, 155, 20, 10);
         Rectangle Inva2 = new Rectangle(465, 220, 20, 10);
         Rectangle Inva3 = new Rectangle(320, 220, 20, 10);
