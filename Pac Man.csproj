@@ -65,6 +65,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -78,6 +79,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\350871__cabled_mess__coin_c_04.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\143609__dwoboyle__weapons-synth-blast-03.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\610484__toumas__game-boy-classic-startup-sound %281%29.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\475347__fupicat__videogame-death-sound.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

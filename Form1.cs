@@ -1,4 +1,8 @@
-﻿using System;
+﻿//hannah guylee
+//pac man game 
+//summitive assignment
+// January 26th 2024
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,14 +22,14 @@ namespace Pac_Man
         int ghostspeed = 2;
         int playerscore = 0;
         int playerlife = 3;
-        int size = 10;
+       
         string mainmenue = "waiting";
         string playerDirection = "right";
         string ghost1Direction = "right";
         string ghost2Direction = "down";
         string ghost3Direction = "right";
 
-        Random randgen = new Random();
+       
         SoundPlayer sp;
 
         SolidBrush yellowBrush = new SolidBrush(Color.Yellow);
@@ -185,15 +189,29 @@ namespace Pac_Man
         }
         public void GameInitialize()
         {
-
+            playerscore = 0;
+            playerlife = 3;
+            playerlifelable.Visible = true;
+            Scorelable.Visible = true;
             Titlelable.Visible = false;
             Subtitlelable1.Visible = false;
             Subtitlelable2.Visible = false;
             Titlelable.Text = "";
             Subtitlelable1.Text = "";
             Subtitlelable2.Text = "";
-            Scorelable.Text = "0";
-          //WALLS
+            Scorelable.Text = $"{playerscore}";
+            playerlifelable.Text = $"{playerlife}";
+
+            pacmantimer.Enabled = true;
+            playerDirection = "right";
+            ghost1Direction = "right";
+            ghost2Direction = "down";
+            ghost3Direction = "right";
+            mainmenue = "running";
+            player.X = 300;
+            player.Y = 300;
+
+            //WALLS
             walls.Clear();
             walls.Add(W1);
             walls.Add(W2);
@@ -301,10 +319,7 @@ namespace Pac_Man
             points.Add(P67);
             points.Add(P68);
 
-            pacmantimer.Enabled = true;
-
-            mainmenue = "running";
-
+           
         }
 
         private void PacMan_Paint(object sender, PaintEventArgs e)
@@ -445,7 +460,7 @@ namespace Pac_Man
             //player lifes
             if (playerlife < 0)
             {
-                mainmenue = "player lost";
+                mainmenue = "playerlost";
             }
             if (player.IntersectsWith(ghost1))
             {
@@ -453,18 +468,24 @@ namespace Pac_Man
                 player.X = 300;
                 player.Y = 300;
                 playerDirection = "right";
+                sp = new SoundPlayer(Properties.Resources.lose_a_life);
+                sp.Play();
             }
             if (player.IntersectsWith(ghost2))
             {
                 playerlife--;
                 player.X = 300;
                 player.Y = 300;
+                sp = new SoundPlayer(Properties.Resources.lose_a_life);
+                sp.Play();
             }
             if (player.IntersectsWith(ghost3))
             {
                 playerlife--;
                 player.X = 300;
                 player.Y = 300;
+                sp = new SoundPlayer(Properties.Resources.lose_a_life);
+                sp.Play();
             }
             if (playerscore < 0)
             {
@@ -481,13 +502,15 @@ namespace Pac_Man
                 {
                     playerscore++;
                     points.RemoveAt(i);
+                    sp = new SoundPlayer(Properties.Resources.coins_1);
+                    sp.Play();
                     break; 
                    
                 }
             }
-            if(playerscore>30 && playerlife>0)
+            if(playerscore>29 && playerlife>0)
             {
-                mainmenue = "player won";
+                mainmenue = "playerwon";
             }
            //player intersects with walls
             for (int i = 0; i < walls.Count; i++)
@@ -498,6 +521,8 @@ namespace Pac_Man
                     player.X = 300;
                     player.Y = 300;
                     playerDirection = "right";
+                    sp = new SoundPlayer(Properties.Resources.wall_colition);
+                    sp.Play();
                     break;
 
                 }
